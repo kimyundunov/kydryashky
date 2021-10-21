@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Наши услуги</title>
+    <link rel="stylesheet" type="text/css" href="Salon.css" />
+    <ul class="menu-main" style="position: fixed; top: 0; z-index: 1; margin-top: -1%; margin-left: -1.5%; margin-right: -1.5%">
+        <li>
+            <input id="OpenMenu" class="OpenMenu" type="image" src="PM/Services/355-3557276_activity-feed-icon1.png" style="margin-left: -15%; margin-top: 0.5%; z-index: 2; width: 3%; height: 2%; font-size:30px; color: white; cursor:pointer" onclick="openNav()">
+
+            <h1 style="margin-top: -3.3%"> <a href="RecordPage.html" class="links" style="color: white; font-family: 'Monotype Corsiva'; font-weight: normal">Кудряшки</a></h1>
+
+        </li></ul>
+    </ul>
+</head>
+
+<body>
+<div style="margin-top: 5%;">
+<div style="width: 950px; border-bottom: dotted black; margin-left: 50px; padding-left: 475px;">
+    <a style="margin-left: 300px; text-decoration: none;" href="HairServices.html">
+
+        <p style="color: black; font-family: Cambria; font-size: 200%; font-weight: bold;"><img src="PM/Services/HairStyle.jpg" style="vertical-align:middle">Парикмахерские услуги</p>
+    </a>
+</div>
+<div style="width: 950px; border-bottom: dotted black; margin-left: 50px; padding-left: 475px; margin-top: -2.5%; margin-bottom: -3%;">
+    <a style="margin-left: 300px; text-decoration: none;" href="NailServices.html">
+
+        <p style="color: black; font-family: Cambria; font-size: 200%; font-weight: bold;"><img src="PM/Services/NailService.jpg" style="vertical-align:middle">Ногтевой сервис</p>
+    </a>
+</div>
+<div style="width: 950px; border-bottom: dotted black; margin-left: 50px; padding-left: 475px; margin-top: -2.5%; margin-bottom: -3%;">
+    <a style="margin-left: 300px; text-decoration: none;" href="LashesServices.html">
+
+        <p style="color: black; font-family: Cambria; font-size: 200%; font-weight: bold;"><img src="PM/Services/LashService.jpg" style="vertical-align:middle">Ресничный сервис</p>
+    </a>
+</div>
+<div style="width: 950px; margin-left: 50px; padding-left: 475px; margin-top: -2.5%; margin-bottom: -3%;">
+    <a style="margin-left: 300px; text-decoration: none;" href="CareServices.html">
+
+        <p style="color: black; font-family: Cambria; font-size: 200%; font-weight: bold;"><img src="PM/Services/Care.jpg" style="vertical-align:middle">Окрашивание / уход</p>
+    </a>
+</div>
+</div>
+<div id="mySidenav" class="sidenav">
+    <a href="RecordPage.html">Записаться онлайн</a>
+    <a href="Services.html">Услуги</a>
+    <a href="Masters.html">Наши мастера</a>
+</div>
+<script>
+    document.addEventListener("click", function(e) {
+        let m = document.getElementById('mySidenav');
+        if (e.target.id != 'OpenMenu' && e.target.id != 'mySidenav') {
+            m.style.display = 'none';
+        } else if (e.target.id == 'OpenMenu') {
+            m.style.display = (m.style.display != 'block') ? 'block' : 'none';
+        }
+    });
+</script>
+
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+</script>
+</body>
+</html>
