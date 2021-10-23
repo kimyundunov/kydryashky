@@ -1,0 +1,27 @@
+.master{ /*Стиль страницы мастеров*/
+    width: 1210px;
+    display: flex;
+    margin: 30px 0px 20px 0px;
+}
+
+.photo img{ /*Фото мастеров*/
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 160px;
+    margin: 0px 0px 0px 100px;
+}
+
+.text{/*Тексты на странице мастеров*/
+    width: 900px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0px 0px 0px 10px;
+    text-align: justify;
+    font-size: 22px;
+}
+
+div.line {/* Параметры линии на странице мастеров */
+    border-bottom: 5px solid black;
+    width: 900px;
+}

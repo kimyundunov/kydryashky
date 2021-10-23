@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Запись на процедуры. Салон Кудряшки</title>
+  <link rel="stylesheet" type="text/css" href="RecordPage.css" />
+  <link rel="stylesheet" type="text/css" href="Salon.css" />
+</head>
+<body>
+  <div class="headers">
+    <div class="title">
+        Кудряшки
+    </div>
+   
+    <ul class="menu">                      <!-- Маркированный список меню -->
+        <li><a class="menua" href="RecordPage.html">Записаться онлайн</a></li>    <!-- Пункты меню -->
+        <li><a class="menua" href="ServicesCategory.html">Услуги</a></li>
+        <li><a class="menua" href="Masters.html">Наши мастера</a></li>
+        <li><a class="menua" href="Stocks.html">Акции</a></li>
+        <li><a class="menua" href="Contact.html">Контакты</a></li>
+    </ul>
+ 
+    <div class = "lk"><a class="menua" href="#">Личный кабинет</a></div>
+</div>
+  <div class="background">
+  <div class="gifDiv"></div>
+  <div class="order">
+    <h1 class="orderheader" align="center">Онлайн-запись</h1>
+    <form method="post" action="RecordPage.html" name="OrdrerForm";><p class="inputField">ФИО <input class="inputfieldName" name="FIO" type="text" placeholder="Например: Анна"/></p>
+    <p class="inputField">Телефон <input class="inputfieldPhone" name="Phone" type="text" placeholder="Например: 89187743614"/></p>
+    <p class="inputField">Пол <select class="inputfieldGender" name="Gender"><option>Не выбран</option><option>Женский</option><option>Мужской</option></select></p>
+    <p class="inputField">Категория<br>процедуры <select class="inputfieldCategory" id="category_id" name="Category"><option value="0">Не выбрана</option><option value="1">Парикмахерские услуги</option><option value="2">Ногтевой сервис</option><option value="3">Ресничный сервис</option><option value="4">Окрашивание / уход</option></select></p>
+    
+    <p class="inputField">Процедура <select class="inputfieldService" id="service_id" disabled> <!--Начало блока с определением услуг в соответствии с категорией-->
+      <option value="0" style="display: none">Не выбрана</option>
+      <script>
+        var all_services =[];
+
+        all_services[0]=["Чёлка", "Женская стрижка", "Мужская стрижка", "Подравнивание кончиков", "Полировка", "Фен", "Плойка", "Вечерняя", "Свадебная", "Косы"];
+        all_services[1]=["Маникюр", "Маникюр + однотонное покрытие", "Дизайн", "Укрепление", "Наращивание", "Педикюр", "Педикюр + покрытие", "Мини-Педикюр (обработка только ногтей)", "Мини-Педикюр (обработка только ногтей) + покрытие"];
+        all_services[2]=["Классика", "Объём 2D", "Объём 3D", "Объём 4D", "Снятие чужой работы"];
+        all_services[3]=["Корни", "Окрашивание по длине", "Мелирование"];
+
+        category_id.onchange=function()
+        {
+          service_id.disabled=false;
+          service_id.innerHTML="<option value='0' style='display: none'>Не выбрана</option>";
+          service=this.value-1;
+          if(service!=-1)
+          {
+            for(var i=0;i<all_services[service].length;i++){
+            service_id.innerHTML+='<option value="'+(i+1)+'">'+all_services[service][i]+'</option>';
+          }
+        }
+        else{
+    service_id.disabled=true;
+}
+      }
+      if(category_id==0){service_id=0;service_id.disabled=true;}
+      </script>
+    </select></p> <!--/*Конец блока с определением услуг в соответствии с категорией-->
+    <p class="inputField">Мастер
+      <select class="inputfieldMaster">
+        <option>Не выбран</option>
+        <option>Яна Некула</option>
+        <option>Инна Жидкова</option>
+        <option>Екатерина Гордеева</option>
+        <option>Мила Лебедева</option>
+        <option>Анна Михайловская</option>
+        <option>Екатерина Шушакова</option>
+        <option>Евгения Мельникова</option>
+      </select>
+    </p>
+    <p class="inputField">Дата <input class="inputfieldDate" name="Date" type="date" /></p></form>
+     <input class="button" type="submit" value="Записаться" onclick="window.location.href = '#Success'"></div></div>
+
+<div id="Success" class="SuccessPopup">
+
+  <div>
+    <a href="#close" title="Закрыть" class="close"><i>X</i></a>
+      <p align="center">Спасибо, запись произведена, позднее мы перезвоним Вам для подтверждения</p>
+    </div>
+  </div>
+</body>
+</html>

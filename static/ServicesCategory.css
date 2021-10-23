@@ -1,0 +1,44 @@
+.categories{
+    margin-top: -1%; 
+}
+
+.categoryfirstdiv{ /*Стиль первого блока категории*/
+    width: 950px;
+    border-bottom: dotted black;
+    margin-left: 50px;
+    padding-left: 475px;
+}
+
+.categorydiv{ /*Стиль категорий (кроме первой и последней)*/
+    width: 950px;
+    border-bottom: dotted black;
+    margin-left: 50px;
+    padding-left: 475px;
+    margin-top: -2.5%;
+    margin-bottom: -3%;
+}
+
+.categorylastdiv{ /*Стиль последнего блока категории*/
+    width: 950px;
+    margin-left: 50px;
+    padding-left: 475px;
+    margin-top: -2.5%;
+    margin-bottom: -3%;
+}
+
+.astyle{ /*Стиль кнопок категорий*/
+    margin-left: 300px;
+    text-decoration: none;
+}
+
+.categorytext{ /*Стиль текста категорий услуг*/
+    color: black;
+    font-family: Cambria;
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.categoryimg{ /*Стиль картинок категорий услуг*/
+    vertical-align: middle;
+}

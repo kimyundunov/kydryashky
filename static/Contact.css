@@ -1,0 +1,35 @@
+.map{ /*Стиль блока с картой на странице контактов*/
+    width: 50vw;
+    height: 60vh;
+    margin-top: 7.5vw;
+    margin-left: 3.5vw;
+    border-radius: 35px;
+    overflow: hidden;
+    position: relative;
+}
+
+.flex-container {
+    /*генерирует flex-контейнер уровня строки*/
+     display: -webkit-inline-flex;
+     display: inline-flex; 
+    }
+
+.contact{ /*Стиль блока с контактами*/
+    width: 40vw;
+    height: 60vh;
+    border-radius: 35px;
+    margin-top: 7.5vw;
+    background-color: rgba(238,236,241,0.7);
+    margin-left: 3.5vw;
+    position: relative;
+}
+
+.text{ /*Стиль текста блока контактов*/
+    margin-left: 7.5%;
+    font-size: 200%;
+}
+
+.icons{ /*Стиль иконок на странице контактов*/
+    vertical-align: middle;
+    text-decoration: none;
+}

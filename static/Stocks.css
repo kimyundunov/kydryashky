@@ -1,0 +1,24 @@
+.stoc{ /*Стиль расположения блоков акций*/
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    width: 400px;
+    height: auto;
+    position: relative;
+    margin: 120px 50px 0 40px;
+}
+.stoc img{ /*Стиль картинок акций*/
+    width: 400px;
+    height: auto;
+}
+ 
+.stoc span { /*Стиль подписей и подблоков на картинках акций*/
+    position: absolute;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    height: 25%;
+    color: rgb(63, 37, 37);
+    width: 100%;
+    bottom:0; 
+    background: linear-gradient(to top, bisque, transparent );
+}
