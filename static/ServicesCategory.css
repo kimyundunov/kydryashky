@@ -41,4 +41,6 @@
 
 .categoryimg{ /*Стиль картинок категорий услуг*/
     vertical-align: middle;
+    width: 111px;
+    height: 108px;
 }

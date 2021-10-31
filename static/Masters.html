@@ -24,114 +24,50 @@
         <div class = "lk"><a class="menua" href="#">Личный кабинет</a></div>
     </div>
 
-
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/1.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Яна Некула
-        <div class="line"></div>
-        Мастер маникюра и педикюра
-        <div class="line"></div>
-        Стаж работы 3 года
-        Окончила курсы по маникюру и наращиванию ногтей в школе «Beautypeople” в Молдове
-        Так же прошла курс «художественная роспись» в школе «EMIschool”
-        Окончила курс по педикюру в школе «Пластек»
-    </div>
-</div>
-
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/2.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Инна Жидкова
-        <div class="line"></div>
-        Мастер маникюра и педикюра
-        <div class="line"></div>
-        Стаж работы по специальности с 2014 года
-        Пройдено обучение в школах: УЦ «Виктори», «Платекс», «Развитие», «ALLENBEAUTY», «Центр дизайна ногтей и маникюра»
-
+<div id="app">
+    <div
+			v-for="(item, index) in masterList"
+			:key="index"
+			class = "master"
+		>
+        <div class = "photo">
+            <img :src="item.photo" alt="Загрузка..">
+        </div>
+        <div class = "text">
+            {{ item.master_name }}
+            <div class="line"></div>
+            {{ item.description.slice(1).split(']')[0] }} 
+            <div class="line"></div>
+            {{ item.description.split(']')[1] }}
+        </div>
     </div>
 </div>
 
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/3.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Катерина Гордеева
-        <div class="line"></div>
-        Парикмахер-стилист
-        <div class="line"></div>
-        Стаж работы с 2008 года
-        Прошла обучение в  Академии SCHWARZKOPF, EstelProfessional, BrelilProfessional и у ведущих отечественных и зарубежных парикмахеров
-    </div>
-</div>
-
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/4.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Мила Лебедева
-        <div class="line"></div>
-        Специалист в области стилистики и колористики
-        <div class="line"></div>
-        Стаж работы с 2003 года
-        Обучалась в академии Долорес, школа парикмахерского искусства
-        Постоянно повышает свою квалификацию и следит за новыми тенденциями
-    </div>
-</div>
-
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/5.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Анна Михайловская
-        <div class="line"></div>
-        Колорист
-        <div class="line"></div>
-        Стаж работы с 2011 года
-        Мастер международного класса
-        Обучалась у мастеров Франции, Италии, Англии, Австралии
-        Диплом SACO (Лондон)
-    </div>
-</div>
-
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/6.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Екатерина Шушакова
-        <div class="line"></div>
-        Мастер по наращиванию ресниц
-        <div class="line"></div>
-        Опыт работы с 2016 года
-        SunLook, курс повышения квалификации по объемному моделирование ресниц 2/3D
-        Курс повышения квалификации по классической технике наращивания ресниц от Ильи Головченко
-    </div>
-</div>
-
-<div class = "master">
-    <div class = "photo">
-        <img src="PM/Services/7.png" alt="Загрузка..">
-    </div>
-    <div class = "text">
-        Евгения Мельникова
-        <div class="line"></div>
-        Мастер по наращиванию ресниц
-        <div class="line"></div>
-        Опыт работы более 5 лет
-        Школа-студия NiceEyes, курс «Наращивание ресниц , классический поресничный метод +2D»
-        LuxuryLahses, курс «Роскошный объем»
-    </div>
-</div>
-
-<a class="orderbut" href="RecordPage.html"><img src="/PM/Services/OrderButton.gif" alt="Записаться"></a>
+<a class="orderbut" href="RecordPage.html"><img src="OrderButton.gif" alt="Записаться"></a>
+<script type="module">
+    import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
+  
+    var app = new Vue({
+      el: '#app',
+      data: {
+        masterList: []
+      },
+      mounted() {
+        const url = 'https://beauty-fuck-saloon.herokuapp.com'
+        const response = fetch(url + '/master')
+            .then(response => response.json())
+						.then(data => {
+							this.masterList = data
+						})
+      },
+			methods: {
+				getRandomInt(max) {
+					const res = Math.floor(Math.random() * max)
+					return res || this.getRandomInt(7)
+				}
+			},
+    })
+  </script>
 </body>
 </html>
 

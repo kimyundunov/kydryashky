@@ -24,7 +24,7 @@
      
         <div class = "lk"><a class="menua" href="#">Личный кабинет</a></div>
     </div>
-<div>
+<div id="app">
   <div class="mainheader">
     <p align="center" class="mainheadertext">Укладки</p>
   </div>
@@ -71,6 +71,17 @@
       </tr>
     </table>
   </div>
-<a class="orderbut" href="RecordPage.html"><img src="/PM/Services/OrderButton.gif" alt="Записаться"></a>
+  <a class="orderbut" href="RecordPage.html"><img src="OrderButton.gif" alt="Записаться"></a>
+
+<script type="module">
+  import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Привет, Vue!'
+    }
+  })
+</script>
 </body>
 </html>

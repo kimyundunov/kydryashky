@@ -131,7 +131,7 @@
 }*/
 
 .gifDiv { /*Блок с гифкой на странице записи*/
-    background: url(/PM/Services/Background.gif);
+    background: url(./Background.gif);
     background-size: contain;
     background-repeat: no-repeat;
     height: 900px;

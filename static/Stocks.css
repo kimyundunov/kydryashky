@@ -22,3 +22,7 @@
     bottom:0; 
     background: linear-gradient(to top, bisque, transparent );
 }
+
+.stoc__desc {
+    margin: 20px 50px 0 40px;
+}

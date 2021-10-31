@@ -53,7 +53,7 @@ body{ /*Стиль body*/
     background-color: rgb(239,237,239);
     padding: 0;
     margin: 0;
-    background: url("/PM/Services/Background.png") no-repeat;
+    background: url("Background.png") no-repeat;
     background-size: 100%;
     background-attachment: fixed;
 }
@@ -119,8 +119,9 @@ body{ /*Стиль body*/
     font-size: 25px;
     margin: 15px 15px 0 0;
  
-    display: -webkit-inline-flex;
-    display: inline-flex;
+    /* display: -webkit-inline-flex;
+    display: inline-flex; */
+    display: none;
     -webkit-justify-content: center;
     justify-content: center;
 }

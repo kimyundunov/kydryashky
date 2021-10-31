@@ -1,38 +1,42 @@
 <template>
-  <div>
-    <v-expansion-panels
-      v-model="expansion"
-      focusable
-      multiple
-    >
-      <v-expansion-panel
-        v-for="item in serviceItems"
-        :key="item.id"
-      >
-        <v-expansion-panel-header>{{ item.name }}</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <div class="mt-2">
-            <v-row
-              v-for="child in item.services"
-              :key="child.id"
-            >
-              <v-col
-                sm="9"
-              >
-                {{ child.name }}
-              </v-col>
-              <v-col
-                sm="3"
-                class="text-right"
-              >
-                {{ child.price }} &#8381;
-              </v-col>
-            </v-row>
-          </div>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+<div>
+  <div class="headers">
+    <div class="title">
+      Кудряшки
+    </div>
+
+    <Menu />
+
+    <div class="lk"><a class="menua" href="#">Личный кабинет</a></div>
   </div>
+  <div class="categories">
+    <div class="categoryfirstdiv">
+      <a class="astyle" href="service/hair">
+
+        <p class="categorytext"><img src="~/static/master/HairStyle.jpg" class="categoryimg">Парикмахерские услуги</p>
+      </a>
+    </div>
+    <div class="categorydiv">
+      <a class="astyle" href="NailServices.html">
+
+        <p class="categorytext"><img src="~/static/master/NailService.jpg" class="categoryimg">Ногтевой сервис</p>
+      </a>
+    </div>
+    <div class="categorydiv">
+      <a class="astyle" href="LashesServices.html">
+
+        <p class="categorytext"><img src="~/static/master/LashService.jpg" class="categoryimg">Ресничный сервис</p>
+      </a>
+    </div>
+    <div class="categorylastdiv">
+      <a class="astyle" href="CareServices.html">
+
+        <p class="categorytext"><img src="~/static/master/Care.jpg" class="categoryimg">Окрашивание / уход</p>
+      </a>
+    </div>
+  </div>
+  <a class="orderbut" href="RecordPage.html"><img src="/PM/Services/OrderButton.gif" alt="Записаться"></a>
+</div>
 </template>
 
 <script>
@@ -51,3 +55,50 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.categories{
+    margin-top: -1%; 
+}
+
+.categoryfirstdiv{ /*Стиль первого блока категории*/
+    width: 950px;
+    border-bottom: dotted black;
+    margin-left: 50px;
+    padding-left: 475px;
+}
+
+.categorydiv{ /*Стиль категорий (кроме первой и последней)*/
+    width: 950px;
+    border-bottom: dotted black;
+    margin-left: 50px;
+    padding-left: 475px;
+    margin-top: -2.5%;
+    margin-bottom: -3%;
+}
+
+.categorylastdiv{ /*Стиль последнего блока категории*/
+    width: 950px;
+    margin-left: 50px;
+    padding-left: 475px;
+    margin-top: -2.5%;
+    margin-bottom: -3%;
+}
+
+.astyle{ /*Стиль кнопок категорий*/
+    margin-left: 300px;
+    text-decoration: none;
+}
+
+.categorytext{ /*Стиль текста категорий услуг*/
+    color: black;
+    font-family: Cambria;
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.categoryimg{ /*Стиль картинок категорий услуг*/
+    vertical-align: middle;
+}
+</style>

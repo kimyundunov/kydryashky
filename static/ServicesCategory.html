@@ -23,32 +23,51 @@
      
         <div class = "lk"><a class="menua" href="#">Личный кабинет</a></div>
     </div>
-<div class="categories">
-<div class="categoryfirstdiv">
-    <a class="astyle" href="HairServices.html">
 
-        <p class="categorytext"><img src="PM/Services/HairStyle.jpg" class="categoryimg">Парикмахерские услуги</p>
-    </a>
+<div id="app" class="categories">
+    <div
+        v-for="(item, index) in serviceList"
+        :key="index"
+        :class="getCategoryClass(index)"
+    >
+        <a class="astyle" :href="`NailServices.html?id=${item.service_type_id}`">
+            <p class="categorytext"><img :src="item.photo" class="categoryimg">{{ item.service_name }}</p>
+        </a>
+    </div>
 </div>
-<div class="categorydiv">
-    <a class="astyle" href="NailServices.html">
-
-        <p class="categorytext"><img src="PM/Services/NailService.jpg" class="categoryimg">Ногтевой сервис</p>
-    </a>
-</div>
-<div class="categorydiv">
-    <a class="astyle" href="LashesServices.html">
-
-        <p class="categorytext"><img src="PM/Services/LashService.jpg" class="categoryimg">Ресничный сервис</p>
-    </a>
-</div>
-<div class="categorylastdiv">
-    <a class="astyle" href="CareServices.html">
-
-        <p class="categorytext"><img src="PM/Services/Care.jpg" class="categoryimg">Окрашивание / уход</p>
-    </a>
-</div>
-</div>
-<a class="orderbut" href="RecordPage.html"><img src="/PM/Services/OrderButton.gif" alt="Записаться"></a>
+<a class="orderbut" href="RecordPage.html"><img src="OrderButton.gif" alt="Записаться"></a>
+<script type="module">
+    import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
+  
+    var app = new Vue({
+      el: '#app',
+      data: {
+        serviceList: []
+      },
+      mounted() {
+        const url = 'https://beauty-fuck-saloon.herokuapp.com'
+        const response = fetch(url + '/service/type')
+            .then(response => response.json())
+            .then(data => {
+                this.serviceList = data
+            })
+      },
+      methods: {
+        getCategoryClass(index) {
+            if (index === 0) {
+                return 'categoryfirstdiv'
+            } else if (index === this.serviceList.length - 1) {
+                return 'categorylastdiv'
+            } else {
+                return 'categorydiv'
+            }
+        },
+        getRandomInt(max) {
+					const res = Math.floor(Math.random() * max)
+					return res || this.getRandomInt(max)
+				}
+      },
+    })
+  </script>
 </body>
 </html>
