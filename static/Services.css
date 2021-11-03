@@ -1,3 +1,9 @@
+.backbutton{
+    margin-left: 3%;
+    margin-top: 3%;
+    width: 3.5%;
+}
+
 .servicesprice { /*Стиль текста на страницах отдельных услуг*/
     white-space: pre;
     font-family: Cambria;
@@ -9,14 +15,16 @@
     border-bottom: double black;
     height: 100px;
     width: 50%;
-    top: 3%;
+    margin-top: -6.5%;
     padding-top: 0.1%;
-    margin-left: 23%;
+    margin-left: 23.5%;
 }
 
 .mainheadertext{ /*Стиль заголовков групп услуг на страницах отдельных услуг*/
+    text-align: center;
     font-family: 'Monotype Corsiva';
     font-size: 300%;
+    top: -3%;
 }
 
 .servicediv{ /*Стиль блока с прайсом на услуги на страницах отдельных услуг*/

@@ -1,12 +1,11 @@
 .toptext{
     color: black;
     font-size: 25px;
-    font-family: Cambria, Cochin;
+    font-family: Cambria;
     width: 130vh;
     padding-left: 10%;
     line-height: 40px;
     text-align: justify;
-    
 }
 
 .topcontent{
@@ -30,7 +29,7 @@
   height: 100%;
   position: absolute;
   opacity: 0;
-  animation: slideanim 40s infinite;
+  animation: slideanim 16s infinite;
 }
 .slideshow-item:nth-child(1),
 .slideshow-item:nth-child(1) img {
@@ -38,15 +37,15 @@
 }
 .slideshow-item:nth-child(2),
 .slideshow-item:nth-child(2) img {
-  animation-delay: 10s;
+  animation-delay: 4s;
 }
 .slideshow-item:nth-child(3),
 .slideshow-item:nth-child(3) img {
-  animation-delay: 20s;
+  animation-delay: 8s;
 }
 .slideshow-item:nth-child(4),
 .slideshow-item:nth-child(4) img {
-  animation-delay: 30s;
+  animation-delay: 16s;
 }
 .slideshow-item img {
   width: 100%;
@@ -67,18 +66,25 @@
   }
 }
 
+.sliderimg{
+  width: 200%;
+  
+}
 
   .hotwindows{
-    height: 30vh;
+    height: 33vh;
     width: 37%;
     background: rgba(214, 209, 214, 0.7);
     text-align: center;
     border-radius: 35px;
-    margin: 0 auto; 
+    margin: 0 auto;
+    margin-top: 3%;
   }
 
   .hottext{
       font-size: 150%;
+      color: #5E2129;
+      padding-top: 5%;
   }
 
   .hotservice{
@@ -88,7 +94,7 @@
     /*margin-left: 19.5%;*/
     border: ridge darkslateblue 2px;
     border-radius: 15px;
-    background: linear-gradient(45deg gray rgb(29, 12, 175));
+    background-color: #dcdcdc;
     font-family: Cambria;
     font-size: 150%;
     margin: 4%;
@@ -96,6 +102,7 @@
 
   .hottime{
     width: 232px;
+    padding-top: -5%;
     padding: 1%;
     text-align: center;
     /*margin-left: 10.5%;*/
@@ -109,10 +116,18 @@
   
   .booking{
     padding: 2%;
-    background-color: #B0C4DE;
-    border: double darkcyan;
+    background-color: #5E2129;
+    color: blanchedalmond;
+    font-size: 20px;
+    border: solid black 2px;
     border-radius: 35px;
     text-decoration: none;
+  }
+
+  .booking:hover{
+    background-color: blanchedalmond;
+    color: #5E2129;
+    border: solid black 2px;
   }
 
   .middlecontent{
@@ -136,12 +151,20 @@
     line-height: 40px;
     text-align: justify;
   }
+  .servimg{
+    width: 80%;
+  }
 .sevicesdiv{
   display: -webkit-flex;
   display: flex;
   
 }
-
+.servicedivlast{
+  display: -webkit-flex;
+  display: flex;
+  padding-bottom: 5%;
+  margin-left: 4%;
+}
 .servtext{
   text-decoration: none;
   font-size: 20px;
@@ -151,7 +174,7 @@
   display: -webkit-inline-flex;
   display: inline-flex;
   text-align: center;
-  margin-left: 15%;
+  margin-left: 14%;
   margin-top: 5%;
 
 }
@@ -160,3 +183,65 @@
 
 }
 
+footer{
+  width: 100%;
+  border-top: solid #5E2129 8px;
+  height: 20%;
+  background-color: rgba(214,209,214,0.8);
+}
+
+.footerdiv{
+  display: flex;
+  width: 100%;
+}
+
+.bottomtext{
+  color: black;
+    font-size: 25px;
+    font-family: Cambria;
+    padding: 1% 5%;
+    line-height: 40px;
+    text-align: justify;
+}
+
+.leftfooterdiv{
+  flex: none;
+  margin-left: 25%;
+  width: 15%;
+}
+
+.leftfootername{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.leftfooterclock{
+  font-size: 23px;
+  margin-left: 5%;
+}
+
+.footerclock{
+  width: 28%;
+  vertical-align: middle;
+}
+
+.rightfooterdiv{
+  flex: none;
+  margin-left: 20%;
+}
+
+.rightfooterlocation{
+  white-space: nowrap;
+  font-size: 23px;
+}
+
+.footerunderground{
+  width: 15%;
+  vertical-align: middle;
+}
+
+.footerlocation{
+  width: 12%;
+  vertical-align: middle;
+}
