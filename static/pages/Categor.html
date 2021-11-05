@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
+    <title>Наши услуги</title>
     <link rel="stylesheet" type="text/css" href="ServicesCategory.css"/>
     <link rel="stylesheet" type="text/css" href="Salon.css" />
 </head>
@@ -10,13 +10,16 @@
 <body>
     <div class="headers">
         <div class="title">
-            Кудряшки/Admin
+            Кудряшки
         </div>
        
         <ul class="menu">                      <!-- Маркированный список меню -->
-               <!-- Пункты меню -->
+            <li><a class="menua" href="RecordPage.html">Записаться онлайн</a></li>    <!-- Пункты меню -->
+            <li><a class="menua" href="MainPage.html">Главная</a></li>
             <li><a class="menua" href="ServicesCategory.html">Услуги</a></li>
-            
+            <li><a class="menua" href="Masters.html">Наши мастера</a></li>
+            <li><a class="menua" href="Stocks.html">Акции</a></li>
+            <li><a class="menua" href="Contact.html">Контакты</a></li>
         </ul>
      
         <div class = "lk"><a class="menua" href="#">Личный кабинет</a></div>
@@ -28,12 +31,11 @@
         :key="index"
         :class="getCategoryClass(index)"
     >
-        <a class="astyle" :href="`NailServices.html?id=${item.service_type_id}`">
+        <a class="astyle" :href="`AdminColor.html?id=${item.service_type_id}`">
             <p class="categorytext"><img :src="item.photo" class="categoryimg">{{ item.service_name }}</p>
         </a>
     </div>
 </div>
-<a class="orderbut" href="RecordPage.html"><img src="OrderButton.gif" alt="Записаться"></a>
 <script type="module">
     import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
   
@@ -69,3 +71,6 @@
   </script>
 </body>
 </html>
+
+
+<!-- :href="`NailServices.html?id=${item.service_type_id}`" -->

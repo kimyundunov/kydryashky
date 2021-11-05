@@ -135,6 +135,30 @@
             .then(data => {
                 this.serviceList = data
             })
+        console.log(window.location.search)
+
+        if (window.location.search) {
+          const urlSearchParams = new URLSearchParams(window.location.search);
+          const params = Object.fromEntries(urlSearchParams.entries());
+
+          const { id, item } = params
+
+          this.form.category = Number(id)
+          this.onChangeCategory()
+              .then(() => {
+                const parseItem = JSON.parse(item)
+                const { descriptionService, masterId } = parseItem
+                this.form.procedure = this.childList.find(v => v.description === descriptionService).svc_id
+                this.onChangeProcedure()
+                  .then(() => {
+                    this.form.master = masterId
+                    this.onChangeMaster()
+                      .then(() => {
+                        this.form.date = this.disabledDateList.find(v => v.date === parseItem.dateText).time_id
+                      })
+                  })
+              })
+        }
       },
       methods: {
         onSubmit() {
@@ -170,35 +194,47 @@
         },
         onChangeCategory() {
           const url = 'https://beauty-fuck-saloon.herokuapp.com'
-          fetch(url + '/service?service_type=' + this.form.category)
+          return fetch(url + '/service?service_type=' + this.form.category)
             .then(response => response.json())
             .then(data => {
               this.childList = data
+              return true
             })
         },
         onChangeMaster() {
           const url = 'https://beauty-fuck-saloon.herokuapp.com'
 
-          fetch(url + '/record/time/master?master_id=' + this.form.master)
+          return fetch(url + '/record/time/master?master_id=' + this.form.master)
             .then(response => response.json())
             .then(data => {
               const times = data.map((v) => {
+                const yy = v.time[0]
+                const mm = v.time[1] - 1
+                const dd = v.time[2]
+                const hh = v.time[3]
+                const mmm = v.time[4]
+                const date = new Date(yy, mm, dd, hh, mmm)
+
+
                 return {
-                  date: this.getFormatDate(new Date(...v.time)),
+                  date: this.getFormatDate(date),
                   ...v
                 }
               })
 
               this.disabledDateList = times
+
+              return true
             })
         },
         onChangeProcedure() {
           const url = 'https://beauty-fuck-saloon.herokuapp.com'
 
-          fetch(url + '/master/service?svc_id=' + this.form.procedure)
+          return fetch(url + '/master/service?svc_id=' + this.form.procedure)
             .then(response => response.json())
             .then(data => {
               this.masterList = data
+              return true
             })
         },
         onChangeDate() {

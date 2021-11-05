@@ -24,31 +24,87 @@
   </div>
 
   <a href="Categor.html"><img src="назад.png"></a>
-  <div style="text-align: center;">
+  <div style="text-align: center;" id="app">
     <table>
         <tr>
             <th rowspan="1" class="first">Окрашивания</th>
-            <th colspan="2"></th>
+            <th colspan="3"></th>
         </tr> 
         <tr>
             <td class="first">Мастер</td>
+            <td class="first">Процедура</td>
             <td class="first">Имеющиеся записи</td>
             <td class="first">Свободно для записи</td>
         </tr>
-        <tr>
-            <td class="first">ФИО_МАСТЕРА</td>
+        <tr
+          v-for="(item, index) in list" :key="index"
+        >
+            <td class="first">{{ item.masterName }}</td>
+            <td class="first">{{ item.descriptionService }}</td>
             <td class="first">Дата</td>
-            <td class="first">Дата</td>
-        </tr>
-        <tr>
-            <td class="first">ФИО_МАСТЕРА</td>
-            <td class="first">Дата</td>
-            <td class="first">Дата</td>
+            <td class="first">{{ item.dateText }}</td>
         </tr>
     </table>
 </div>
 
+<script type="module">
+  import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
 
+  var app = new Vue({
+    el: '#app',
+    data: {
+      list: []
+    },
+    mounted() {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const { id } = Object.fromEntries(urlSearchParams.entries());
+      const url = 'https://beauty-fuck-saloon.herokuapp.com'
+
+      return fetch(url + '/admin/record/free/time/all?service_type=' + id)
+        .then(response => response.json())
+        .then(data => {
+            this.list = data.map(v => {
+              const yy = v.time[0]
+              const mm = v.time[1] - 1
+              const dd = v.time[2]
+              const hh = v.time[3]
+              const mmm = v.time[4]
+              const date = new Date(yy, mm, dd, hh, mmm)
+
+              return {
+                  ...v,
+                  date,
+                  dateText: this.getFormatDate(date)
+              }
+            })
+            return true
+        })
+    },
+    methods: {
+      getFormatDate(date) {
+        let dd = date.getDate();
+        let mm = date.getMonth() + 1;
+        let hh = date.getHours()
+        let mmm = date.getMinutes()
+  
+        const yyyy = date.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        if (hh < 10) {
+            hh = '0' + hh;
+        }
+        if (mmm < 10) {
+          mmm = '0' + mmm;
+        }
+        return dd + '-' + mm + '-' + yyyy + ' ' + hh + ':' + mmm
+      }
+    },
+  })
+</script>
 
 </body>
 
