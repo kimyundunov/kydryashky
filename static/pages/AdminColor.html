@@ -28,11 +28,10 @@
     <table>
         <tr>
             <th rowspan="1" class="first">Окрашивания</th>
-            <th colspan="3"></th>
+            <th colspan="2"></th>
         </tr> 
         <tr>
             <td class="first">Мастер</td>
-            <td class="first">Процедура</td>
             <td class="first">Имеющиеся записи</td>
             <td class="first">Свободно для записи</td>
         </tr>
@@ -40,7 +39,6 @@
           v-for="(item, index) in list" :key="index"
         >
             <td class="first">{{ item.masterName }}</td>
-            <td class="first">{{ item.descriptionService }}</td>
             <td class="first">Дата</td>
             <td class="first">{{ item.dateText }}</td>
         </tr>
