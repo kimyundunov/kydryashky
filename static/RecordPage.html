@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Запись на процедуры. Салон Кудряшки</title>
+  <link rel="stylesheet" type="text/css" href="RecordPage.css" />
+  <link rel="stylesheet" type="text/css" href="Salon.css" />
+</head>
+
+<body>
+  <div class="headers">
+    <div class="title">
+      Кудряшки
+    </div>
+
+    <ul class="menu">
+      <!-- Маркированный список меню -->
+      <li><a class="mainmenuli" href="MainPage.html">Главная</a></li>
+      <li><a class="menua" href="RecordPage.html">Записаться онлайн</a></li>      <!-- Пункты меню -->
+      <li><a class="menua" href="ServicesCategory.html">Прайс</a></li>
+      <li><a class="menua" href="Masters.html">Наши мастера</a></li>
+      <li><a class="menua" href="Stocks.html">Акции</a></li>
+      <li><a class="menua" href="Contact.html">Контакты</a></li>
+    </ul>
+
+    <div class="lk"><a class="menua" href="#">Личный кабинет</a></div>
+  </div>
+  <div id="app">
+    <div v-if="!success" class="background">
+      <div class="gifDiv"></div>
+      <div class="order">
+        <h1 class="orderheader" align="center">Онлайн-запись</h1>
+        <form method="post" action="RecordPage.html" name="OrdrerForm">
+          <p class="inputField">ФИО
+            <input v-model="form.name" class="inputfieldName" name="FIO" type="text" placeholder="Например: Анна" />
+          </p>
+          <p class="inputField">Телефон
+            <input v-model="form.phone" class="inputfieldPhone" name="Phone" type="text" placeholder="Например: 89187743614" />
+          </p>
+          <p class="inputField">Пол
+            <select v-model="form.gender" class="inputfieldGender" name="Gender">
+              <option
+                :value="false"
+              >Женский</option>
+              <option
+                :value="true"
+              >Мужской</option>
+            </select>
+          </p>
+          <p class="inputField">Категория
+            <br>процедуры
+            <select v-model="form.category" class="inputfieldCategory" id="category_id" name="Category" @change="onChangeCategory">
+              <option
+                v-for="(item, index) in serviceList"
+                :key="index"
+                :value="item.service_type_id"
+              >
+                {{ item.service_name }}
+              </option>
+            </select>
+          </p>
+
+          <p class="inputField">Процедура
+            <select v-model="form.procedure" @change="onChangeProcedure" class="inputfieldService" id="service_id" :disabled="!form.category">
+              <option
+                v-for="(item, index) in childList"
+                :key="index"
+                :value="item.svc_id"
+              >
+                {{ item.description }}
+              </option>
+            </select>
+          </p>
+          <!--/*Конец блока с определением услуг в соответствии с категорией-->
+          <p class="inputField">Мастер
+            <select v-model="form.master" class="inputfieldMaster" @change="onChangeMaster" :disabled="!form.procedure">
+              <option
+                v-for="(item, index) in masterList" :key="index"
+                :value="item.master_id"
+              >
+                {{ item.master_name }}
+              </option>
+            </select>
+          </p>
+          <p class="inputField">Дата
+            <select v-model="form.date" class="inputfieldMaster" :disabled="!form.master">
+              <option
+                v-for="(item, index) in disabledDateList" :key="index"
+                :value="item.time_id"
+              >
+                {{ item.date }}
+              </option>
+            </select>
+          </p>
+        </form>
+        <input class="button" type="submit" value="Записаться" @click="onSubmit">
+      </div>
+    </div>
+
+    <div v-if="success" id="Success" v-if="success">
+      <div>
+        <a href="#close" title="Закрыть" class="close"><i>X</i></a>
+        <p align="center">Спасибо, запись произведена, позднее мы перезвоним Вам для подтверждения</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
+  
+    var app = new Vue({
+      el: '#app',
+      data: {
+        success: false,
+        form: {
+          name: '',
+          phone: '',
+          gender: '',
+          category: '',
+          procedure: '',
+          master: '',
+          date: ''
+        },
+        serviceList: [],
+        masterList: [],
+        childList: [],
+        disabledDateList: [],
+        currentDate: '2021-29-24T08:30'
+      },
+      mounted() {
+        const url = 'https://beauty-fuck-saloon.herokuapp.com'
+        fetch(url + '/service/type')
+            .then(response => response.json())
+            .then(data => {
+                this.serviceList = data
+            })
+        console.log(window.location.search)
+
+        if (window.location.search) {
+          const urlSearchParams = new URLSearchParams(window.location.search);
+          const params = Object.fromEntries(urlSearchParams.entries());
+
+          const { id, item } = params
+
+          this.form.category = Number(id)
+          this.onChangeCategory()
+              .then(() => {
+                const parseItem = JSON.parse(item)
+                const { descriptionService, masterId } = parseItem
+                this.form.procedure = this.childList.find(v => v.description === descriptionService).svc_id
+                this.onChangeProcedure()
+                  .then(() => {
+                    this.form.master = masterId
+                    this.onChangeMaster()
+                      .then(() => {
+                        this.form.date = this.disabledDateList.find(v => v.date === parseItem.dateText).time_id
+                      })
+                  })
+              })
+        }
+      },
+      methods: {
+        onSubmit() {
+          const url = 'https://beauty-fuck-saloon.herokuapp.com'
+          fetch(url + '/record/add/lock', {
+            method: 'POST',
+            body: JSON.stringify({
+              timeId: this.form.date
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(() => {
+              fetch(url + '/record/add/record', {
+                method: 'POST',
+                body: JSON.stringify({
+                  master_id: this.form.master,
+                  record_date: new Date(...this.disabledDateList.find(v => v.time_id === this.form.date).time),
+                  service_name: this.form.procedure,
+                  client_name: this.form.name,
+                  phone: this.form.phone,
+                  sex: this.form.gender
+                }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+                .then(() => {
+                  this.success = true
+                })
+            })
+        },
+        onChangeCategory() {
+          const url = 'https://beauty-fuck-saloon.herokuapp.com'
+          return fetch(url + '/service?service_type=' + this.form.category)
+            .then(response => response.json())
+            .then(data => {
+              this.childList = data
+              return true
+            })
+        },
+        onChangeMaster() {
+          const url = 'https://beauty-fuck-saloon.herokuapp.com'
+
+          return fetch(url + '/record/time/master?master_id=' + this.form.master)
+            .then(response => response.json())
+            .then(data => {
+              const times = data.map((v) => {
+                const yy = v.time[0]
+                const mm = v.time[1] - 1
+                const dd = v.time[2]
+                const hh = v.time[3]
+                const mmm = v.time[4]
+                const date = new Date(yy, mm, dd, hh, mmm)
+
+
+                return {
+                  date: this.getFormatDate(date),
+                  ...v
+                }
+              })
+
+              this.disabledDateList = times
+
+              return true
+            })
+        },
+        onChangeProcedure() {
+          const url = 'https://beauty-fuck-saloon.herokuapp.com'
+
+          return fetch(url + '/master/service?svc_id=' + this.form.procedure)
+            .then(response => response.json())
+            .then(data => {
+              this.masterList = data
+              return true
+            })
+        },
+        onChangeDate() {
+          const changedDate = new Date(this.form.date)
+          let flag = false
+
+          this.disabledDateList.forEach((date) => {
+            if (date + '' === changedDate + '' && flag === false) {
+              flag = true;
+            }
+          })
+
+          if (flag) {
+            console.log('error')
+          } else {
+            this.onSubmit()
+          }
+        },
+        getFormatDate(date) {
+          let dd = date.getDate();
+          let mm = date.getMonth() + 1;
+          let hh = date.getHours()
+          let mmm = date.getMinutes()
+    
+          const yyyy = date.getFullYear();
+          if (dd < 10) {
+              dd = '0' + dd;
+          }
+          if (mm < 10) {
+              mm = '0' + mm;
+          }
+          if (hh < 10) {
+              hh = '0' + hh;
+          }
+          if (mmm < 10) {
+            mmm = '0' + mmm;
+          }
+          return dd + '-' + mm + '-' + yyyy + ' ' + hh + ':' + mmm
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

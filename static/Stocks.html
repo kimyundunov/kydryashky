@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Акции салона Кудряшки</title>
+  <link rel="stylesheet" type="text/css" href="Stocks.css" />
+  <link rel="stylesheet" type="text/css" href="Salon.css" />
+</head>
+
+<body>
+  <div class="headers">
+    <div class="title">
+      Кудряшки
+    </div>
+
+    <ul class="menu">
+      <!-- Маркированный список меню -->
+      <li><a class="mainmenuli" href="MainPage.html">Главная</a></li>
+      <li><a class="menua" href="RecordPage.html">Записаться онлайн</a></li>      <!-- Пункты меню -->
+      <li><a class="menua" href="ServicesCategory.html">Прайс</a></li>
+      <li><a class="menua" href="Masters.html">Наши мастера</a></li>
+      <li><a class="menua" href="Stocks.html">Акции</a></li>
+      <li><a class="menua" href="Contact.html">Контакты</a></li>
+    </ul>
+
+    <div class="lk"><a class="menua" href="#">Личный кабинет</a></div>
+  </div>
+  <div id="app">
+    <div class="stoc" v-for="(item, index) in stockList" :key="index">
+      <img :src="item.picture_url">
+      <span>{{ item.description }}</span>
+    </div>
+    <div class="stoc__desc">
+      Срок действия акций ограничен, следует уточнить у администратора при подтверждении записи
+    </div>
+  </div>
+
+  <a class="orderbut" href="RecordPage.html"><img src="OrderButton.gif" alt="Записаться"></a>
+
+  <script type="module">
+    import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js'
+  
+    var app = new Vue({
+      el: '#app',
+      data: {
+        stockList: []
+      },
+      mounted() {
+        const url = 'https://beauty-fuck-saloon.herokuapp.com'
+        fetch(url + '/sales/picture')
+            .then(response => response.json())
+            .then(data => {
+              this.stockList = data
+            })
+      }
+    })
+  </script>
+</body>
+
+</html>
