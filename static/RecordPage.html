@@ -86,7 +86,7 @@
           <p class="inputField">Дата
             <select v-model="form.date" class="inputfieldMaster" :disabled="!form.master">
               <option
-                v-for="(item, index) in disabledDateList" :key="index"
+                v-for="(item, index) in getDisabledDateList" :key="index"
                 :value="item.time_id"
               >
                 {{ item.date }}
@@ -141,6 +141,8 @@
           const urlSearchParams = new URLSearchParams(window.location.search);
           const params = Object.fromEntries(urlSearchParams.entries());
 
+          console.log(params)
+
           const { id, item } = params
 
           this.form.category = Number(id)
@@ -158,6 +160,11 @@
                       })
                   })
               })
+        }
+      },
+      computed: {
+        getDisabledDateList() {
+          return this.disabledDateList.sort((a, b) => new Date(a.date) - new Date(b.date))
         }
       },
       methods: {

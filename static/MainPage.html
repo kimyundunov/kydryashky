@@ -61,7 +61,7 @@
         v-for="(item, index) in serviceList" :key="index"
         :value="item.service_type_id">{{ item.service_name }}</option>
 </select><select v-model="date" class="hottime"><option
-    v-for="(item, index) in datesList" :key="index" :value="item.date"
+    v-for="(item, index) in getDatesList" :key="index" :value="item.date"
     >{{ item.dateText }}</option></select></p>
 <a class="booking" :href="`RecordPage.html?date=${date}&id=${type}&item=${getItem}`">Забронировать</a>
 </div>
@@ -132,6 +132,9 @@
         getItem() {
             const item = this.datesList.find(v => v.date === this.date)
             return JSON.stringify(item)
+        },
+        getDatesList() {
+            return this.datesList.sort((a, b) => new Date(a.date) - new Date(b.date))
         }
       },
       methods: {

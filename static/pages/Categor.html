@@ -14,12 +14,7 @@
         </div>
        
         <ul class="menu">                      <!-- Маркированный список меню -->
-            <li><a class="menua" href="RecordPage.html">Записаться онлайн</a></li>    <!-- Пункты меню -->
-            <li><a class="menua" href="MainPage.html">Главная</a></li>
-            <li><a class="menua" href="ServicesCategory.html">Услуги</a></li>
-            <li><a class="menua" href="Masters.html">Наши мастера</a></li>
-            <li><a class="menua" href="Stocks.html">Акции</a></li>
-            <li><a class="menua" href="Contact.html">Контакты</a></li>
+            <li><a class="menua" href="https://kydryashky.surge.sh/RecordPage.html">Записаться онлайн</a></li> 
         </ul>
      
         <div class = "lk"><a class="menua" href="#">Личный кабинет</a></div>
@@ -31,7 +26,7 @@
         :key="index"
         :class="getCategoryClass(index)"
     >
-        <a class="astyle" :href="`AdminColor.html?id=${item.service_type_id}`">
+        <a class="astyle" :href="`AdminColor.html?id=${item.service_type_id}&name=${item.service_name}`">
             <p class="categorytext"><img :src="item.photo" class="categoryimg">{{ item.service_name }}</p>
         </a>
     </div>
@@ -73,4 +68,4 @@
 </html>
 
 
-<!-- :href="`NailServices.html?id=${item.service_type_id}`" -->
+<!-- :href="`Price.html?id=${item.service_type_id}`" -->
