@@ -29,6 +29,12 @@
   <div id="app">
     <div v-if="!success" class="background">
       <div class="gifDiv"></div>
+      <div v-if="showModal" class="submit-modal">
+        <div class="submit-modal__answer">
+          <p>Вы ввели номер {{ form.phone }}.<br>Подтвердите, что мы можем связаться с вами<br> по этому номеру для подтверждения<br>информации о записи.</p>
+          <a class="modalbut" @click="onSubmit">Да, всё верно</a><a class="modalbut" @click="showModal = false">Нет, исправить</a>
+        </div>
+      </div>
       <div class="order">
         <h1 class="orderheader" align="center">Онлайн-запись</h1>
         <form method="post" action="RecordPage.html" name="OrdrerForm">
@@ -94,7 +100,7 @@
             </select>
           </p>
         </form>
-        <input class="button" type="submit" value="Записаться" @click="onSubmit">
+        <input class="button" type="submit" value="Записаться" @click="showModal = true">
       </div>
     </div>
 
@@ -126,7 +132,8 @@
         masterList: [],
         childList: [],
         disabledDateList: [],
-        currentDate: '2021-29-24T08:30'
+        currentDate: '2021-29-24T08:30',
+        showModal: false
       },
       mounted() {
         const url = 'https://beauty-fuck-saloon.herokuapp.com'
@@ -196,6 +203,7 @@
               })
                 .then(() => {
                   this.success = true
+                  this.showModal = false
                 })
             })
         },
